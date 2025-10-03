@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack AI - Your Smart Finance Buddy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .brand-gradient-text {
+            background: -webkit-linear-gradient(45deg, #a78bfa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px; 
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; /* bg-slate-800 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569; /* bg-slate-600 */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* bg-slate-500 */
+        }
+        .nav-link.active {
+            background-color: #334155; /* bg-slate-700 */
+            color: #e2e8f0; /* text-slate-200 */
+            font-weight: 600;
+        }
+         .nav-link.active svg {
+            color: #c4b5fd; /* text-violet-300 */
+        }
+        .hidden {
+            display: none;
+        }
+        /* Custom Checkbox */
+        .interest-checkbox:checked + label {
+            border-color: #8b5cf6; /* violet-500 */
+            background-color: #334155; /* slate-700 */
+        }
+        .interest-checkbox:checked + label svg {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-64 fixed inset-y-0 left-0 bg-slate-800 border-r border-slate-700 hidden md:flex flex-col z-10">
+            <!-- Logo -->
+            <div class="flex items-center justify-center h-20 flex-shrink-0">
+                <div class="flex items-center">
+                    <svg class="h-8 w-auto text-violet-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1h4v1h-4zm-2 10v-1h4v1h-4zm-4-4v-1h12v1H6z"/>
+                    </svg>
+                    <span class="ml-2 text-xl font-bold text-slate-100">FinTrack AI</span>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="flex-1 px-4 py-4 space-y-2">
+                <a href="#dashboard" class="nav-link active flex items-center px-4 py-2.5 rounded-lg">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#transactions" class="nav-link flex items-center px-4 py-2.5 text-slate-400 hover:bg-slate-700 hover:text-slate-200 rounded-lg">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h.01M12 7h.01M16 7h.01M9 17h6M12 21a9 9 0 000-18h.01M12 3a9 9 0 010 18H5.99M16 3.01a9 9 0 010 18h-1.01" /></svg>
+                    <span>Transactions</span>
+                </a>
+                <a href="#budgets" class="nav-link flex items-center px-4 py-2.5 text-slate-400 hover:bg-slate-700 hover:text-slate-200 rounded-lg">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>
+                    <span>Budgets</span>
+                </a>
+                <a href="#insights" class="nav-link flex items-center px-4 py-2.5 text-slate-400 hover:bg-slate-700 hover:text-slate-200 rounded-lg">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                    <span>Insights</span>
+                </a>
+                <a href="#plans" class="nav-link flex items-center px-4 py-2.5 text-slate-400 hover:bg-slate-700 hover:text-slate-200 rounded-lg">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4M17 3v4m-2 2h4M18 17v4m-2-2h4M12 5v14m-4-7h8" /></svg>
+                    <span>Pro Plans</span>
+                </a>
+                <a href="#ai-organizer" class="nav-link flex items-center px-4 py-2.5 text-slate-400 hover:bg-slate-700 hover:text-slate-200 rounded-lg">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 5V3m0 18v-2M8.46 8.46L7.05 7.05m9.9 9.9l-1.41-1.41M15.54 8.46l1.41-1.41M7.05 16.95l1.41 1.41M12 12a5 5 0 110-10 5 5 0 010 10z"></path></svg>
+                    <span>AI Organizer</span>
+                </a>
+                <a href="#settings" class="nav-link flex items-center px-4 py-2.5 text-slate-400 hover:bg-slate-700 hover:text-slate-200 rounded-lg">
+                    <svg class="h-5 w-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924-1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="px-4 py-4 mt-auto border-t border-slate-700">
+                <div id="login-button-container">
+                    <button id="sidebar-login-btn" class="w-full bg-violet-600 text-white hover:bg-violet-700 font-semibold py-2.5 px-4 rounded-lg shadow-sm transition-colors">
+                        Login
+                    </button>
+                </div>
+                <div id="user-profile-container" class="hidden">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://placehold.co/40x40/94a3b8/1e293b?text=JD" alt="User Avatar" class="rounded-full">
+                        <div>
+                            <p id="profile-username" class="font-semibold text-sm text-slate-100">John Doe</p>
+                            <p class="text-xs text-slate-400">Basic Plan</p>
+                        </div>
+                    </div>
+                    <button class="w-full text-center text-sm bg-slate-700 hover:bg-slate-600 text-slate-300 font-medium py-2 rounded-lg transition-colors">
+                        Profile Settings
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 md:ml-64">
+            <!-- Mobile Header -->
+            <header class="md:hidden bg-slate-800/80 backdrop-blur-lg sticky top-0 z-40 border-b border-slate-700 p-4 flex items-center justify-between">
+                <div class="flex items-center">
+                    <svg class="h-7 w-auto text-violet-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1h4v1h-4zm-2 10v-1h4v1h-4zm-4-4v-1h12v1H6z"/></svg>
+                    <span class="ml-2 text-lg font-bold">FinTrack AI</span>
+                </div>
+                 <button class="p-2">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                </button>
+            </header>
+
+            <main class="p-4 sm:p-6 lg:p-10">
+                <div id="main-content">
+                    <!-- Hero Section (Represents Landing Page) -->
+                    <section id="hero" class="text-center my-12">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-slate-100">
+                            Automate Your Finances.<br>Ace Your Savings Game.
+                        </h1>
+                        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
+                            FinTrack AI auto-tracks expenses from your SMS and email alerts to create budgets and give you smart insights.
+                        </p>
+                        <button id="get-started-btn" class="bg-violet-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg hover:bg-violet-700 transition-all text-lg transform hover:-translate-y-1">
+                            Get Started for Free
+                        </button>
+                    </section>
+
+                    <!-- Feature Showcase: How it works -->
+                    <section id="features" class="my-20">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold tracking-tight text-slate-100">How It Works</h2>
+                            <p class="text-slate-500 mt-2">Effortless tracking in three simple steps.</p>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-8 text-center">
+                            <div class="bg-slate-800 p-6 rounded-2xl shadow-lg shadow-black/20 transition-all hover:shadow-violet-500/10 hover:-translate-y-1 border border-slate-700">
+                                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-lg bg-violet-500/20 mb-4">
+                                    <svg class="h-6 w-6 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                </div>
+                                <h3 class="text-lg font-semibold mb-2 text-slate-100">1. Connect Securely</h3>
+                                <p class="text-slate-400 text-sm">Grant read-only access to SMS and email to find finance-related messages from UPI apps and banks.</p>
+                            </div>
+                            <div class="bg-slate-800 p-6 rounded-2xl shadow-lg shadow-black/20 transition-all hover:shadow-green-500/10 hover:-translate-y-1 border border-slate-700">
+                                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-lg bg-green-500/20 mb-4">
+                                   <svg class="h-6 w-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                                </div>
+                                <h3 class="text-lg font-semibold mb-2 text-slate-100">2. AI Auto-Categorizes</h3>
+                                <p class="text-slate-400 text-sm">Our AI instantly sorts spending into categories like Food, Travel, and Shopping. No more manual entry!</p>
+                            </div>
+                            <div class="bg-slate-800 p-6 rounded-2xl shadow-lg shadow-black/20 transition-all hover:shadow-orange-500/10 hover:-translate-y-1 border border-slate-700">
+                                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-lg bg-orange-500/20 mb-4">
+                                    <svg class="h-6 w-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                                </div>
+                                <h3 class="text-lg font-semibold mb-2 text-slate-100">3. Get Smart Insights</h3>
+                                <p class="text-slate-400 text-sm">Receive personalized tips, track budgets, and discover where your money goes to make smarter decisions.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Dashboard Section -->
+                    <section id="dashboard" class="pt-16">
+                        <div class="mb-8">
+                            <h2 class="text-3xl font-bold tracking-tight text-slate-100">Dashboard</h2>
+                            <p class="text-slate-500 mt-1">A clear overview of your financial health.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Left Column: Summary & Chart -->
+                            <div class="lg:col-span-2 space-y-6">
+                                <!-- Summary Cards -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="bg-slate-800 p-5 rounded-2xl shadow-md border border-slate-700">
+                                        <h4 class="text-slate-400 font-medium text-sm">Monthly Budget</h4>
+                                        <p id="total-balance-value" class="text-2xl font-semibold text-green-400 mt-1">₹0</p>
+                                    </div>
+                                    <div class="bg-slate-800 p-5 rounded-2xl shadow-md border border-slate-700">
+                                        <h4 class="text-slate-400 font-medium text-sm">This Month's Spending</h4>
+                                        <p id="spending-value" class="text-2xl font-semibold text-red-400 mt-1">₹0</p>
+                                    </div>
+                                    <div class="bg-slate-800 p-5 rounded-2xl shadow-md border border-slate-700">
+                                        <h4 class="text-slate-400 font-medium text-sm">This Month's Savings</h4>
+                                        <p id="savings-value" class="text-2xl font-semibold text-blue-400 mt-1">₹0</p>
+                                    </div>
+                                </div>
+                                <!-- Expense Breakdown Chart -->
+                                <div id="expense-breakdown-container" class="bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-700">
+                                    <h3 class="text-lg font-semibold mb-4 text-slate-100">Expense Breakdown</h3>
+                                    <div class="w-full space-y-3">
+                                        <!-- Dynamic content will be injected here -->
+                                        <p class="text-slate-500 text-sm">Your spending breakdown will appear here once you have transactions.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column: Recent Transactions -->
+                            <div id="transactions" class="bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-700">
+                                <h3 class="text-lg font-semibold mb-4 text-slate-100">Recent Transactions</h3>
+                                <div id="transactions-list" class="space-y-4">
+                                   <!-- Dynamic content will be injected here -->
+                                   <p class="text-slate-500 text-sm">Your recent transactions will appear here automatically.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Budgets & Savings Goals Section -->
+                    <section id="budgets" class="pt-20">
+                         <div class="mb-8">
+                            <h2 class="text-3xl font-bold tracking-tight text-slate-100">Budgets & Savings Goals</h2>
+                            <p class="text-slate-500 mt-1">Stay on track and save for what matters.</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Budgets Card -->
+                            <div class="bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-700">
+                                <h3 class="text-lg font-semibold mb-4 text-slate-100">Monthly Budgets</h3>
+                                <div id="budgets-container" class="space-y-4">
+                                     <!-- Dynamic content will be injected here -->
+                                     <p class="text-slate-500 text-sm">Create budgets to track spending in specific categories.</p>
+                                </div>
+                                <button id="add-new-budget-btn" class="mt-4 w-full bg-slate-700 text-violet-300 font-semibold py-2 px-4 rounded-lg hover:bg-slate-600 transition text-sm">+ Add New Budget</button>
+                            </div>
+
+                            <!-- Savings Goal Card -->
+                            <div class="bg-slate-800 p-6 rounded-2xl shadow-md border border-slate-700 flex flex-col">
+                                <h3 id="savings-goal-title" class="text-lg font-semibold mb-2 text-slate-100">Savings Goal</h3>
+                                <div class="flex-grow flex flex-col items-center justify-center text-center">
+                                    <div id="savings-goal-percentage" class="text-5xl font-bold brand-gradient-text my-2">0%</div>
+                                    <p id="savings-goal-progress-text" class="text-slate-400">Set a goal to start saving.</p>
+                                </div>
+                                <p id="savings-goal-forecast" class="text-sm text-center text-slate-500 mt-4">Complete the setup to get a forecast.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- AI Insights & Recommendations Section -->
+                    <section id="insights" class="pt-20">
+                        <div class="mb-8">
+                            <h2 class="text-3xl font-bold tracking-tight text-slate-100">AI Financial Insights</h2>
+                            <p class="text-slate-500 mt-1">Your personal AI assistant for smarter money moves.</p>
+                        </div>
+                        <div id="insights-container" class="grid md:grid-cols-3 gap-6">
+                           <!-- Dynamic content will be injected here -->
+                           <p class="text-slate-500 text-sm md:col-span-3">Your personalized AI insights will appear here.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Pro Plans Section -->
+                    <section id="plans" class="pt-20">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold tracking-tight text-slate-100">Find the Perfect Plan</h2>
+                            <p class="text-slate-500 mt-2">Unlock powerful features to supercharge your savings.</p>
+                        </div>
+                        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                            <!-- Basic Plan -->
+                            <div class="bg-slate-800 p-8 rounded-2xl shadow-lg shadow-black/20 border border-slate-700 flex flex-col">
+                                <h3 class="text-xl font-semibold text-slate-100">Basic</h3>
+                                <p class="text-4xl font-bold my-4">₹0<span class="text-lg font-medium text-slate-400">/mo</span></p>
+                                <p class="text-slate-400 text-sm mb-6">For students getting started with budgeting.</p>
+                                <ul class="space-y-3 text-sm text-slate-300 flex-grow">
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Automated SMS/Email Tracking</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>AI Categorization</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Basic Budgeting</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Monthly Reports</li>
+                                </ul>
+                                <button class="mt-8 w-full bg-slate-700 text-slate-300 font-semibold py-2.5 px-4 rounded-lg cursor-not-allowed">
+                                    Your Current Plan
+                                </button>
+                            </div>
+
+                            <!-- Intermediate Plan -->
+                            <div class="bg-slate-800 p-8 rounded-2xl shadow-lg shadow-violet-500/20 border-2 border-violet-500 flex flex-col relative overflow-hidden">
+                                <div class="absolute top-0 right-0 bg-violet-500 text-white text-xs font-bold px-8 py-1 transform translate-x-10 rotate-45">POPULAR</div>
+                                <h3 class="text-xl font-semibold text-violet-300">Intermediate</h3>
+                                <p class="text-4xl font-bold my-4">₹99<span class="text-lg font-medium text-slate-400">/mo</span></p>
+                                <p class="text-slate-400 text-sm mb-6">For those serious about hitting their financial goals.</p>
+                                <ul class="space-y-3 text-sm text-slate-300 flex-grow">
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Everything in Basic</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Unlimited Budgets</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Savings Goal Tracking</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Advanced AI Insights</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Custom Categories</li>
+                                </ul>
+                                <button class="mt-8 w-full bg-violet-600 text-white font-semibold py-2.5 px-4 rounded-lg shadow-md hover:shadow-lg hover:bg-violet-700 transition-all transform hover:-translate-y-0.5">
+                                    Upgrade Now
+                                </button>
+                            </div>
+                            
+                            <!-- Pro Plan -->
+                            <div class="bg-slate-800 p-8 rounded-2xl shadow-lg shadow-black/20 border border-slate-700 flex flex-col">
+                                <h3 class="text-xl font-semibold text-slate-100">Pro</h3>
+                                <p class="text-4xl font-bold my-4">₹199<span class="text-lg font-medium text-slate-400">/mo</span></p>
+                                <p class="text-slate-400 text-sm mb-6">For power users who want complete control.</p>
+                                <ul class="space-y-3 text-sm text-slate-300 flex-grow">
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Everything in Intermediate</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Export Data to CSV</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Priority Support</li>
+                                    <li class="flex items-center"><svg class="h-5 w-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Investment Tracking <span class="text-xs bg-yellow-400/20 text-yellow-300 ml-2 px-1.5 py-0.5 rounded-full">Soon</span></li>
+                                </ul>
+                                <button class="mt-8 w-full bg-slate-700 text-violet-300 font-semibold py-2.5 px-4 rounded-lg hover:bg-slate-600 transition-colors">
+                                    Upgrade to Pro
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- AI Organizer Section -->
+                    <section id="ai-organizer" class="pt-20">
+                        <div class="text-center mb-12">
+                            <h2 class="text-3xl font-bold tracking-tight text-slate-100">Your AI Financial Organizer</h2>
+                            <p class="text-slate-500 mt-2">Smart guidance to maximize your savings and grow your wealth.</p>
+                        </div>
+
+                        <div id="ai-organizer-login-prompt" class="text-center bg-slate-800 p-8 rounded-2xl max-w-2xl mx-auto border border-slate-700">
+                            <p class="text-slate-400">Please <button id="ai-organizer-login-btn" class="font-semibold text-violet-400 hover:underline">log in</button> to access your personalized financial guidance.</p>
+                        </div>
+
+                        <div id="ai-organizer-content" class="hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                <!-- Financial Health Score & Chatbot -->
+                                <div class="lg:col-span-1 space-y-8">
+                                    <div class="bg-slate-800 p-8 rounded-2xl shadow-lg shadow-black/20 border border-slate-700 flex flex-col items-center justify-center text-center">
+                                        <h3 class="text-lg font-semibold text-slate-100 mb-2">Financial Health Score</h3>
+                                        <div class="text-7xl font-bold brand-gradient-text my-4">78</div>
+                                        <p class="text-slate-400">You're on a <span class="text-green-400 font-semibold">Good</span> track! There's room for improvement.</p>
+                                    </div>
+                                    
+                                    <!-- AI Chatbot -->
+                                    <div class="bg-slate-800 rounded-2xl shadow-lg shadow-black/20 border border-slate-700 flex flex-col h-[450px]">
+                                        <h3 class="text-lg font-semibold text-slate-100 p-4 border-b border-slate-700 flex-shrink-0">Ask FinBot AI</h3>
+                                        <div id="chat-messages" class="flex-grow p-4 space-y-4 overflow-y-auto">
+                                            <!-- Initial Message -->
+                                            <div class="flex">
+                                                <div class="bg-slate-700 rounded-lg p-3 max-w-xs text-sm">
+                                                    <p>Hi! I'm FinBot. Ask me how to save, invest, or budget your money.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form id="chat-form" class="p-4 border-t border-slate-700 flex-shrink-0 flex items-center gap-2">
+                                            <input type="text" id="chat-input" placeholder="Ask about saving, investing..." class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition" autocomplete="off">
+                                            <button type="submit" class="bg-violet-600 text-white rounded-lg p-2 hover:bg-violet-700 transition-colors shrink-0">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <!-- Main Recommendations -->
+                                <div class="lg:col-span-2 space-y-6">
+                                    <!-- How to Save More -->
+                                    <div class="bg-slate-800 p-6 rounded-2xl shadow-lg shadow-black/20 border border-slate-700">
+                                        <h3 class="text-xl font-semibold text-slate-100 mb-4">How to Save More This Month</h3>
+                                        <div class="space-y-4">
+                                            <div class="flex items-start gap-4 p-4 bg-slate-700/50 rounded-lg">
+                                                <div class="text-2xl mt-1">💡</div>
+                                                <div>
+                                                    <h4 class="font-semibold text-slate-200">Reduce Food Delivery Orders</h4>
+                                                    <p class="text-sm text-slate-400">Your spending on Zomato and Swiggy is higher than average. Try cooking at home 2-3 times more per week to save an estimated ₹1,200/month.</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-start gap-4 p-4 bg-slate-700/50 rounded-lg">
+                                                <div class="text-2xl mt-1">🔄</div>
+                                                <div>
+                                                    <h4 class="font-semibold text-slate-200">Review Your Subscriptions</h4>
+                                                    <p class="text-sm text-slate-400">You have both Netflix and Spotify. Consider switching to a student bundle or family plan with friends to potentially cut costs by 50%.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- How to Invest Your Savings -->
+                                    <div class="bg-slate-800 p-6 rounded-2xl shadow-lg shadow-black/20 border border-slate-700">
+                                        <h3 class="text-xl font-semibold text-slate-100 mb-4">Create Passive Income with Your Savings</h3>
+                                        <p class="text-sm text-slate-500 mb-4">Based on your savings of <span id="ai-organizer-savings" class="font-bold text-slate-300">₹0</span> this month, here are some options:</p>
+                                        <div class="space-y-4">
+                                            <div class="border border-green-500/30 p-4 rounded-lg">
+                                                <h4 class="font-semibold text-green-300">Low Risk: Mutual Funds (SIP)</h4>
+                                                <p class="text-sm text-slate-400 mt-1">Start a Systematic Investment Plan (SIP) in a Nifty 50 Index Fund. You can begin with as little as ₹500/month. It's a great way to build long-term wealth steadily.</p>
+                                            </div>
+                                            <div class="border border-yellow-500/30 p-4 rounded-lg">
+                                                <h4 class="font-semibold text-yellow-300">Medium Risk: Peer-to-Peer (P2P) Lending</h4>
+                                                <p class="text-sm text-slate-400 mt-1">Platforms like Cred or BharatPe allow you to lend your money to others for fixed returns, often higher than bank deposits. Do your research before investing.</p>
+                                            </div>
+                                            <div class="border border-red-500/30 p-4 rounded-lg">
+                                                <h4 class="font-semibold text-red-300">High Risk: Stock Market</h4>
+                                                <p class="text-sm text-slate-400 mt-1">With a small portion of your savings, you could invest in stocks of companies you believe in. This has high growth potential but also comes with higher risk.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                     <!-- Settings / Account Linking Section -->
+                    <section id="settings" class="pt-20">
+                        <div class="mb-8">
+                            <h2 class="text-3xl font-bold tracking-tight text-slate-100">Settings & Connections</h2>
+                            <p class="text-slate-500 mt-1">Manage your profile and data sources.</p>
+                        </div>
+                        <div class="max-w-2xl mx-auto space-y-8">
+                            <div class="bg-slate-800 p-8 rounded-2xl shadow-lg shadow-black/20 border border-slate-700">
+                                <h3 class="text-lg font-semibold mb-4 text-slate-100">Linked Accounts for Auto-Tracking</h3>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between p-3 border border-slate-700 rounded-lg hover:bg-slate-700/50 transition-colors">
+                                        <div class="flex items-center"><img src="https://placehold.co/32x32/334155/f1f5f9?text=G" alt="Gmail" class="rounded-full mr-3"/><div><p class="font-semibold text-sm text-slate-200">Gmail</p><p class="text-xs text-green-400">Connected</p></div></div>
+                                        <button class="text-xs text-slate-500 hover:text-red-400">Disconnect</button>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 border border-slate-700 rounded-lg hover:bg-slate-700/50 transition-colors">
+                                        <div class="flex items-center"><img src="https://placehold.co/32x32/334155/f1f5f9?text=S" alt="SMS" class="rounded-full mr-3"/><div><p class="font-semibold text-sm text-slate-200">SMS Messages</p><p class="text-xs text-green-400">Connected</p></div></div>
+                                        <button class="text-xs text-slate-500 hover:text-red-400">Disconnect</button>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 border border-slate-700 rounded-lg bg-slate-700/50 hover:bg-slate-700 transition-colors">
+                                        <div class="flex items-center"><img src="https://placehold.co/32x32/334155/f1f5f9?text=P" alt="PayTM" class="rounded-full mr-3"/><div><p class="font-semibold text-sm text-slate-200">PayTM Notifications</p><p class="text-xs text-slate-500">Not connected</p></div></div>
+                                        <button class="text-white bg-violet-600 hover:bg-violet-700 font-semibold px-3 py-1 rounded-md text-xs">Connect</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                             <div class="bg-slate-800 p-8 rounded-2xl shadow-lg shadow-black/20 border border-slate-700">
+                                <h3 class="text-lg font-semibold mb-4 text-slate-100">Get Support</h3>
+                                <p class="text-sm text-slate-400 mb-6">Have a question or feedback? We're here to help.</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                                    <a href="#" class="bg-slate-700 hover:bg-slate-600 p-4 rounded-lg transition-colors">
+                                        <p class="font-semibold text-slate-200">Read FAQs</p>
+                                        <p class="text-xs text-slate-400">Find quick answers</p>
+                                    </a>
+                                    <a href="mailto:support@fintrackai.com" class="bg-slate-700 hover:bg-slate-600 p-4 rounded-lg transition-colors">
+                                        <p class="font-semibold text-slate-200">Email Us</p>
+                                        <p class="text-xs text-slate-400">support@fintrackai.com</p>
+                                    </a>
+                                    <a href="#" class="bg-slate-700 hover:bg-slate-600 p-4 rounded-lg transition-colors">
+                                        <p class="font-semibold text-slate-200">Give Feedback</p>
+                                        <p class="text-xs text-slate-400">Help us improve</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                
+                <footer class="text-center py-10 mt-16 border-t border-slate-700">
+                     <p class="text-sm text-slate-500">&copy; 2024 FinTrack AI. All rights reserved.</p>
+                </footer>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Onboarding Flow -->
+    <div id="onboarding-flow" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+        <div>
+            <!-- Step 1: Expenses -->
+            <div id="onboarding-step-1" class="hidden">
+                <div class="text-center max-w-2xl mx-auto">
+                    <h2 id="onboarding-welcome-message" class="text-3xl font-bold tracking-tight text-slate-100">Welcome, John!</h2>
+                    <p class="text-slate-400 mt-2 mb-8">Let's personalize your experience. Where do you usually spend your money?</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-left">
+                        <div><input type="checkbox" id="cb-food" class="hidden interest-checkbox"><label for="cb-food" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🍔</span><span class="font-semibold text-sm">Food & Dining</span></label></div>
+                        <div><input type="checkbox" id="cb-shopping" class="hidden interest-checkbox"><label for="cb-shopping" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🛍️</span><span class="font-semibold text-sm">Shopping</span></label></div>
+                        <div><input type="checkbox" id="cb-transport" class="hidden interest-checkbox"><label for="cb-transport" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🚌</span><span class="font-semibold text-sm">Transport</span></label></div>
+                        <div><input type="checkbox" id="cb-bills" class="hidden interest-checkbox"><label for="cb-bills" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🧾</span><span class="font-semibold text-sm">Bills & Utilities</span></label></div>
+                        <div><input type="checkbox" id="cb-entertainment" class="hidden interest-checkbox"><label for="cb-entertainment" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🎬</span><span class="font-semibold text-sm">Entertainment</span></label></div>
+                        <div><input type="checkbox" id="cb-health" class="hidden interest-checkbox"><label for="cb-health" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">💊</span><span class="font-semibold text-sm">Health</span></label></div>
+                    </div>
+                    <button class="onboarding-next-btn mt-8 w-full max-w-xs mx-auto bg-violet-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-violet-700 transition-all">Next</button>
+                </div>
+            </div>
+            <!-- Step 2: Goals -->
+            <div id="onboarding-step-2" class="hidden">
+                <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-100">Great! What are your long-term goals?</h2>
+                    <p class="text-slate-400 mt-2 mb-8">This helps us give you better savings recommendations.</p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-left">
+                        <div><input type="checkbox" id="cb-gadget" class="hidden interest-checkbox"><label for="cb-gadget" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">💻</span><span class="font-semibold text-sm">New Gadget</span></label></div>
+                        <div><input type="checkbox" id="cb-travel" class="hidden interest-checkbox"><label for="cb-travel" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">✈️</span><span class="font-semibold text-sm">Travel</span></label></div>
+                        <div><input type="checkbox" id="cb-education" class="hidden interest-checkbox"><label for="cb-education" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🎓</span><span class="font-semibold text-sm">Education</span></label></div>
+                        <div><input type="checkbox" id="cb-emergency" class="hidden interest-checkbox"><label for="cb-emergency" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🛡️</span><span class="font-semibold text-sm">Emergency Fund</span></label></div>
+                        <div><input type="checkbox" id="cb-event" class="hidden interest-checkbox"><label for="cb-event" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🎉</span><span class="font-semibold text-sm">A Big Event</span></label></div>
+                        <div><input type="checkbox" id="cb-other" class="hidden interest-checkbox"><label for="cb-other" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🤔</span><span class="font-semibold text-sm">Just Saving</span></label></div>
+                    </div>
+                    <button class="onboarding-next-btn mt-8 w-full max-w-xs mx-auto bg-violet-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-violet-700 transition-all">Next</button>
+                </div>
+            </div>
+            <!-- Step 3: Investments -->
+            <div id="onboarding-step-3" class="hidden">
+                <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-100">Any investment interests?</h2>
+                    <p class="text-slate-400 mt-2 mb-8">We'll provide tailored insights if you're looking to grow your money.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-left">
+                        <div><input type="checkbox" id="cb-stocks" class="hidden interest-checkbox"><label for="cb-stocks" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">📈</span><span class="font-semibold text-sm">Stocks</span></label></div>
+                        <div><input type="checkbox" id="cb-crypto" class="hidden interest-checkbox"><label for="cb-crypto" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🪙</span><span class="font-semibold text-sm">Crypto</span></label></div>
+                        <div><input type="checkbox" id="cb-mutual" class="hidden interest-checkbox"><label for="cb-mutual" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">📊</span><span class="font-semibold text-sm">Mutual Funds</span></label></div>
+                        <div><input type="checkbox" id="cb-none" class="hidden interest-checkbox"><label for="cb-none" class="bg-slate-800 border-2 border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center cursor-pointer transition-colors duration-200"><span class="text-3xl mb-2">🤷</span><span class="font-semibold text-sm">Not Interested</span></label></div>
+                    </div>
+                    <button class="onboarding-next-btn mt-8 w-full max-w-xs mx-auto bg-violet-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-violet-700 transition-all">Next</button>
+                </div>
+            </div>
+                <!-- Step 4: Budget -->
+            <div id="onboarding-step-4" class="hidden">
+                <div class="text-center max-w-2xl mx-auto">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-100">Finally, set your financial baseline</h2>
+                    <p class="text-slate-400 mt-2 mb-8">This will help us create accurate budgets and track your progress.</p>
+                    <div class="max-w-sm mx-auto space-y-4">
+                        <div>
+                            <label for="goal-name-input" class="block text-sm font-medium text-slate-300 mb-1 text-left">What are you saving for?</label>
+                            <input type="text" id="goal-name-input" name="goal-name-input" placeholder="e.g., New Laptop" class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label for="goal-amount-input" class="block text-sm font-medium text-slate-300 mb-1 text-left">Total Goal Amount</label>
+                            <input type="number" id="goal-amount-input" name="goal-amount-input" placeholder="e.g., 50000" class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label for="monthly-budget-input" class="block text-sm font-medium text-slate-300 mb-1 text-left">Your Total Monthly Budget (e.g., pocket money)</label>
+                            <input type="number" id="monthly-budget-input" name="monthly-budget-input" placeholder="e.g., 20000" class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                        </div>
+                        <div>
+                            <label for="saving-goal-input" class="block text-sm font-medium text-slate-300 mb-1 text-left">How much do you want to save per month?</label>
+                            <input type="number" id="saving-goal-input" name="saving-goal-input" placeholder="e.g., 5000" class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                        </div>
+                    </div>
+                        <button id="onboarding-finish-btn" class="mt-8 w-full max-w-xs mx-auto bg-violet-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-violet-700 transition-all">Finish Setup</button>
+                </div>
+            </div>
+                <!-- Step 5: Completion -->
+            <div id="onboarding-complete" class="hidden">
+                <div class="text-center max-w-2xl mx-auto">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-100">All Done!</h2>
+                    <p class="text-slate-400 mt-2">We're preparing your personalized dashboard...</p>
+                        <div class="flex justify-center items-center mt-8">
+                        <svg class="animate-spin h-8 w-8 text-violet-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Login/Sign Up Modal -->
+    <div id="signup-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center hidden z-50">
+        <div class="bg-slate-800 p-8 rounded-2xl shadow-lg w-full max-w-md border border-slate-700 relative">
+            <!-- Close button -->
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-500 hover:text-slate-200 transition-colors">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <h2 class="text-2xl font-bold text-center text-slate-100 mb-1">Create Your Account</h2>
+            <p class="text-center text-slate-400 text-sm mb-6">Let's get you set up!</p>
+
+            <form id="signup-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-300 mb-1">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                </div>
+                 <div>
+                    <label for="email" class="block text-sm font-medium text-slate-300 mb-1">Email ID</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                </div>
+                 <div>
+                    <label for="phone" class="block text-sm font-medium text-slate-300 mb-1">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="9876543210" required class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                </div>
+                 <div>
+                    <label for="city" class="block text-sm font-medium text-slate-300 mb-1">City</label>
+                    <input type="text" id="city" name="city" placeholder="e.g., Mumbai" required class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                </div>
+                 <div>
+                    <label for="upi" class="block text-sm font-medium text-slate-300 mb-1">UPI ID</label>
+                    <input type="text" id="upi" name="upi" placeholder="yourname@bank" required class="w-full bg-slate-700 border border-slate-600 text-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 outline-none transition">
+                    <p class="text-xs text-slate-500 mt-1">Needed to track your UPI transaction notifications.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-violet-600 text-white font-semibold py-2.5 px-4 rounded-lg shadow-md hover:shadow-lg hover:bg-violet-700 transition-all transform hover:-translate-y-0.5">
+                    Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Global State ---
+            let userProfile = {
+                name: "User",
+                budget: 0,
+                savingsGoal: 0, // This is now monthly savings
+                goalName: "Savings Goal",
+                goalAmount: 0,
+                transactions: [],
+                budgets: []
+            };
+
+            // --- Mock Data & AI Simulation ---
+
+            // This simulates the AI extracting data from SMS/email.
+            const MOCK_TRANSACTIONS = [
+                { vendor: "Zomato", amount: 250, type: "debit", category: "Food & Dining", emoji: "🍔", date: "2024-10-03" },
+                { vendor: "PayTM - Metro", amount: 50, type: "debit", category: "Transport", emoji: "🚌", date: "2024-10-03" },
+                { vendor: "Pocket Money", amount: 5000, type: "credit", category: "Income", emoji: "💰", date: "2024-10-02" },
+                { vendor: "Myntra", amount: 1299, type: "debit", category: "Shopping", emoji: "🛍️", date: "2024-10-01" },
+                { vendor: "Netflix", amount: 199, type: "debit", category: "Entertainment", emoji: "🎬", date: "2024-10-01" },
+                { vendor: "Swiggy", amount: 320, type: "debit", category: "Food & Dining", emoji: "🍔", date: "2024-09-30" },
+                { vendor: "Spotify", amount: 119, type: "debit", category: "Entertainment", emoji: "🎵", date: "2024-09-28" }
+            ];
+            
+            // This simulates the AI generating insights based on transaction data.
+            function generateAIInsights(transactions) {
+                const insights = [];
+                const spendingByCategory = transactions.reduce((acc, t) => {
+                    if (t.type === 'debit') {
+                        acc[t.category] = (acc[t.category] || 0) + t.amount;
+                    }
+                    return acc;
+                }, {});
+
+                const foodSpending = spendingByCategory['Food & Dining'] || 0;
+                if (foodSpending > 500) {
+                    insights.push({
+                        title: "Spending Alert",
+                        message: `You've spent ₹${foodSpending.toLocaleString('en-IN')} on eating out this month. Maybe try a home-cooked meal?`,
+                        borderColor: "border-yellow-400"
+                    });
+                }
+
+                const subscriptions = transactions.filter(t => ['Netflix', 'Spotify', 'Amazon Prime'].includes(t.vendor));
+                if (subscriptions.length > 1) {
+                     const subTotal = subscriptions.reduce((sum, sub) => sum + sub.amount, 0);
+                    insights.push({
+                        title: "Subscription Savings",
+                        message: `You have ${subscriptions.length} subscriptions costing ₹${subTotal}/mo. Consider reviewing them to save money.`,
+                        borderColor: "border-blue-400"
+                    });
+                }
+                
+                insights.push({
+                    title: "Upcoming Bill",
+                    message: "Heads up! Your mobile recharge of ₹239 is due in 3 days. Make sure you have enough balance.",
+                    borderColor: "border-green-400"
+                });
+
+                return insights;
+            }
+
+            // --- UI Rendering Functions ---
+            function renderDashboard() {
+                const totalSpending = userProfile.transactions.filter(t => t.type === 'debit').reduce((sum, t) => sum + t.amount, 0);
+                const totalSavings = userProfile.budget - totalSpending;
+                
+                document.getElementById('total-balance-value').textContent = `₹${userProfile.budget.toLocaleString('en-IN')}`;
+                document.getElementById('spending-value').textContent = `₹${totalSpending.toLocaleString('en-IN')}`;
+                document.getElementById('savings-value').textContent = `₹${totalSavings.toLocaleString('en-IN')}`;
+
+                const aiOrganizerSavingsEl = document.getElementById('ai-organizer-savings');
+                if (aiOrganizerSavingsEl) {
+                    aiOrganizerSavingsEl.textContent = `₹${totalSavings.toLocaleString('en-IN')}`;
+                }
+
+                renderTransactions();
+                renderExpenseBreakdown();
+                renderBudgets();
+                renderAIInsights();
+                renderSavingsGoal();
+            }
+
+            function renderTransactions() {
+                const listEl = document.getElementById('transactions-list');
+                listEl.innerHTML = ''; // Clear existing
+                if (userProfile.transactions.length === 0) {
+                    listEl.innerHTML = '<p class="text-slate-500 text-sm">Your recent transactions will appear here automatically.</p>';
+                    return;
+                }
+                const recentTransactions = userProfile.transactions.slice(0, 5);
+                recentTransactions.forEach(t => {
+                    const textColor = t.type === 'credit' ? 'text-green-400' : 'text-red-400';
+                    const sign = t.type === 'credit' ? '+' : '-';
+                    const bgColor = t.type === 'credit' ? 'bg-green-500/20' : 'bg-red-500/20';
+
+                    listEl.innerHTML += `
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-9 h-9 rounded-full ${bgColor} flex items-center justify-center mr-3 text-sm">${t.emoji}</div>
+                                <div>
+                                    <p class="font-semibold text-sm text-slate-200">${t.vendor}</p>
+                                    <p class="text-xs text-slate-500">${t.category}</p>
+                                </div>
+                            </div>
+                            <p class="font-semibold text-sm ${textColor}">${sign} ₹${t.amount.toLocaleString('en-IN')}</p>
+                        </div>
+                    `;
+                });
+                 if (userProfile.transactions.length > 5) {
+                    listEl.innerHTML += `<button class="w-full text-violet-400 font-semibold hover:underline text-sm pt-2">View All</button>`;
+                }
+            }
+
+            function renderExpenseBreakdown() {
+                const container = document.getElementById('expense-breakdown-container');
+                container.innerHTML = `<h3 class="text-lg font-semibold mb-4 text-slate-100">Expense Breakdown</h3>`;
+                const spending = userProfile.transactions.filter(t => t.type === 'debit');
+                if (spending.length === 0) {
+                     container.innerHTML += '<p class="text-slate-500 text-sm">Your spending breakdown will appear here once you have transactions.</p>';
+                     return;
+                }
+
+                const spendingByCategory = spending.reduce((acc, t) => {
+                    if(!acc[t.category]) acc[t.category] = { total: 0, emoji: t.emoji };
+                    acc[t.category].total += t.amount;
+                    return acc;
+                }, {});
+
+                const totalSpending = spending.reduce((sum, t) => sum + t.amount, 0);
+
+                const chartEl = document.createElement('div');
+                chartEl.className = 'w-full space-y-3';
+
+                const categoryColors = {
+                    'Food & Dining': 'bg-yellow-400', 'Transport': 'bg-blue-400', 'Shopping': 'bg-pink-400', 'Entertainment': 'bg-violet-400', 'Other': 'bg-gray-500'
+                };
+                
+                Object.entries(spendingByCategory).forEach(([category, data]) => {
+                    const percentage = (data.total / totalSpending) * 100;
+                    const color = categoryColors[category] || 'bg-gray-500';
+                    chartEl.innerHTML += `
+                        <div class="flex items-center">
+                            <div class="w-1/4 text-sm text-slate-400">${data.emoji} ${category.split(' ')[0]}</div>
+                            <div class="w-3/4 bg-slate-700 rounded-full h-2.5">
+                                <div class="${color} h-2.5 rounded-full" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.appendChild(chartEl);
+            }
+
+            function renderBudgets() {
+                const container = document.getElementById('budgets-container');
+                container.innerHTML = '';
+                if(userProfile.budgets.length === 0) {
+                    container.innerHTML = '<p class="text-slate-500 text-sm">Create budgets to track spending in specific categories.</p>';
+                    return;
+                }
+
+                userProfile.budgets.forEach(budget => {
+                     const spent = userProfile.transactions
+                        .filter(t => t.category === budget.name && t.type === 'debit')
+                        .reduce((sum, t) => sum + t.amount, 0);
+                    const percentage = (spent / budget.amount) * 100;
+
+                    container.innerHTML += `
+                     <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="text-sm font-medium text-slate-300">${budget.emoji} ${budget.name}</span>
+                            <span class="text-xs font-medium text-slate-500">₹${spent.toLocaleString('en-IN')} / ₹${budget.amount.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div class="w-full bg-slate-700 rounded-full h-2">
+                            <div class="${budget.color} h-2 rounded-full" style="width: ${Math.min(percentage, 100)}%"></div>
+                        </div>
+                    </div>`;
+                });
+            }
+
+             function renderAIInsights() {
+                const container = document.getElementById('insights-container');
+                container.innerHTML = '';
+                const insights = generateAIInsights(userProfile.transactions);
+                if(insights.length === 0) {
+                     container.innerHTML = '<p class="text-slate-500 text-sm md:col-span-3">Your personalized AI insights will appear here.</p>';
+                     return;
+                }
+                insights.forEach(insight => {
+                    container.innerHTML += `
+                    <div class="bg-slate-800 p-5 rounded-xl border-l-4 ${insight.borderColor} shadow-lg shadow-black/20 transition-transform hover:scale-105">
+                        <h4 class="font-semibold mb-1 text-slate-100">${insight.title}</h4>
+                        <p class="text-slate-400 text-sm">${insight.message}</p>
+                    </div>`;
+                });
+            }
+
+            function renderSavingsGoal() {
+                const savedAmount = 0; // For a new user, this is always 0 initially
+                const goalAmount = userProfile.goalAmount;
+                const goalName = userProfile.goalName;
+                const monthlySavings = userProfile.savingsGoal;
+
+                document.getElementById('savings-goal-title').textContent = `Savings Goal: ${goalName}`;
+
+                if (goalAmount > 0) {
+                    const percentage = Math.round((savedAmount / goalAmount) * 100);
+                    document.getElementById('savings-goal-percentage').textContent = `${percentage}%`;
+                    document.getElementById('savings-goal-progress-text').textContent = `₹${savedAmount.toLocaleString('en-IN')} saved of ₹${goalAmount.toLocaleString('en-IN')}`;
+                } else {
+                    document.getElementById('savings-goal-percentage').textContent = `0%`;
+                    document.getElementById('savings-goal-progress-text').textContent = `Set a goal to start saving.`;
+                }
+                
+                if (monthlySavings > 0 && goalAmount > 0) {
+                    const monthsToGoal = Math.ceil((goalAmount - savedAmount) / monthlySavings);
+                    document.getElementById('savings-goal-forecast').textContent = `At this rate, you'll reach your goal in about ${monthsToGoal} months.`;
+                } else {
+                    document.getElementById('savings-goal-forecast').textContent = `Set a monthly savings goal to get a forecast.`;
+                }
+            }
+
+
+            // --- Event Listeners & Flow Control ---
+            const signupModal = document.getElementById('signup-modal');
+            const getStartedBtn = document.getElementById('get-started-btn');
+            const sidebarLoginBtn = document.getElementById('sidebar-login-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const signupForm = document.getElementById('signup-form');
+            const aiOrganizerLoginBtn = document.getElementById('ai-organizer-login-btn');
+
+            function showModal() { signupModal.classList.remove('hidden'); }
+            function hideModal() { signupModal.classList.add('hidden'); }
+
+            getStartedBtn.addEventListener('click', showModal);
+            sidebarLoginBtn.addEventListener('click', showModal);
+            aiOrganizerLoginBtn.addEventListener('click', showModal);
+            closeModalBtn.addEventListener('click', hideModal);
+            signupModal.addEventListener('click', (e) => { if (e.target === signupModal) hideModal(); });
+
+            const onboardingFlow = document.getElementById('onboarding-flow');
+            const steps = Array.from(onboardingFlow.querySelectorAll('[id^="onboarding-step-"]'));
+            const completionScreen = document.getElementById('onboarding-complete');
+            const loginButtonContainer = document.getElementById('login-button-container');
+            const userProfileContainer = document.getElementById('user-profile-container');
+            
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                userProfile.name = document.getElementById('name').value || "User";
+                hideModal();
+                startOnboarding();
+            });
+
+            function startOnboarding() {
+                loginButtonContainer.classList.add('hidden');
+                document.getElementById('profile-username').textContent = userProfile.name;
+                const userInitial = userProfile.name.trim().charAt(0).toUpperCase();
+                userProfileContainer.querySelector('img').src = `https://placehold.co/40x40/94a3b8/1e293b?text=${userInitial}`;
+                userProfileContainer.classList.remove('hidden');
+
+                onboardingFlow.classList.remove('hidden');
+                document.getElementById('onboarding-welcome-message').textContent = `Welcome, ${userProfile.name}!`;
+                steps.forEach(step => step.classList.add('hidden'));
+                completionScreen.classList.add('hidden');
+                steps[0].classList.remove('hidden');
+            }
+            
+            onboardingFlow.querySelectorAll('.onboarding-next-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const currentStep = button.closest('[id^="onboarding-step-"]');
+                    const currentIndex = steps.indexOf(currentStep);
+                    currentStep.classList.add('hidden');
+                    if (steps[currentIndex + 1]) {
+                        steps[currentIndex + 1].classList.remove('hidden');
+                    }
+                });
+            });
+
+            document.getElementById('onboarding-finish-btn').addEventListener('click', () => {
+                userProfile.budget = parseFloat(document.getElementById('monthly-budget-input').value) || 0;
+                userProfile.savingsGoal = parseFloat(document.getElementById('saving-goal-input').value) || 0;
+                userProfile.goalName = document.getElementById('goal-name-input').value.trim() || "Savings Goal";
+                userProfile.goalAmount = parseFloat(document.getElementById('goal-amount-input').value) || 0;
+                
+                const currentStep = document.getElementById('onboarding-step-4');
+                currentStep.classList.add('hidden');
+                completionScreen.classList.remove('hidden');
+
+                setTimeout(() => {
+                    finishOnboarding();
+                }, 2500);
+            });
+
+            function finishOnboarding() {
+                onboardingFlow.classList.add('hidden');
+                userProfile.transactions = MOCK_TRANSACTIONS;
+                
+                // Show AI Organizer content now that user is logged in
+                document.getElementById('ai-organizer-login-prompt').classList.add('hidden');
+                document.getElementById('ai-organizer-content').classList.remove('hidden');
+                
+                // Set up initial budgets based on transactions
+                userProfile.budgets = [
+                    { name: 'Food & Dining', amount: 5000, emoji: '🍔', color: 'bg-yellow-400' },
+                    { name: 'Shopping', amount: 2000, emoji: '🛍️', color: 'bg-pink-500' },
+                    { name: 'Entertainment', amount: 1500, emoji: '🎬', color: 'bg-violet-500' }
+                ];
+                
+                renderDashboard();
+
+                document.getElementById('hero').classList.add('hidden');
+                document.getElementById('features').classList.add('hidden');
+                document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // --- Add New Budget Logic ---
+            const addNewBudgetBtn = document.getElementById('add-new-budget-btn');
+            
+            addNewBudgetBtn.addEventListener('click', () => {
+                if (document.getElementById('new-budget-form-container')) return;
+                addNewBudgetBtn.style.display = 'none';
+
+                const newBudgetFormHTML = `
+                <div id="new-budget-form-container" class="bg-slate-700/50 p-3 rounded-lg mt-4 border border-slate-600">
+                    <input id="new-budget-name" type="text" placeholder="Budget Name (e.g., Education)" class="w-full bg-slate-600 border border-slate-500 text-slate-200 rounded-md px-2 py-1 text-sm focus:ring-1 focus:ring-violet-500 focus:border-violet-500 outline-none transition mb-2">
+                    <input id="new-budget-amount" type="number" placeholder="Total Amount" class="w-full bg-slate-600 border border-slate-500 text-slate-200 rounded-md px-2 py-1 text-sm focus:ring-1 focus:ring-violet-500 focus:border-violet-500 outline-none transition mb-2">
+                    <div id="ai-suggestion-box" class="hidden text-xs text-slate-400 bg-slate-600 p-2 rounded-md mb-2"></div>
+                    <div class="flex gap-2">
+                        <button id="save-budget-btn" class="flex-1 bg-violet-600 text-white font-semibold py-1 px-3 rounded-md hover:bg-violet-700 transition text-sm">Save</button>
+                        <button id="cancel-budget-btn" class="flex-1 bg-slate-600 text-slate-300 font-semibold py-1 px-3 rounded-md hover:bg-slate-500 transition text-sm">Cancel</button>
+                    </div>
+                </div>`;
+                
+                addNewBudgetBtn.parentElement.insertAdjacentHTML('beforeend', newBudgetFormHTML);
+                const formContainer = document.getElementById('new-budget-form-container');
+                const nameInput = document.getElementById('new-budget-name');
+                const suggestionBox = document.getElementById('ai-suggestion-box');
+
+                // AI Suggestion Logic
+                nameInput.addEventListener('input', () => {
+                    const category = nameInput.value.trim();
+                    const spendingInCat = userProfile.transactions
+                        .filter(t => t.category.toLowerCase().includes(category.toLowerCase()) && t.type === 'debit')
+                        .reduce((sum, t) => sum + t.amount, 0);
+                    
+                    if (spendingInCat > 0) {
+                        const suggestedAmount = Math.ceil(spendingInCat / 100) * 100; // Round up to nearest 100
+                        suggestionBox.innerHTML = `💡 AI Suggestion: Based on past spending, we recommend a budget of <button class="font-bold text-violet-300" onclick="document.getElementById('new-budget-amount').value = ${suggestedAmount}">₹${suggestedAmount.toLocaleString()}</button>`;
+                        suggestionBox.classList.remove('hidden');
+                    } else {
+                        suggestionBox.classList.add('hidden');
+                    }
+                });
+
+                document.getElementById('cancel-budget-btn').addEventListener('click', () => {
+                    formContainer.remove();
+                    addNewBudgetBtn.style.display = 'block';
+                });
+
+                document.getElementById('save-budget-btn').addEventListener('click', () => {
+                    const amountInput = document.getElementById('new-budget-amount');
+                    const name = nameInput.value.trim() || 'New Budget';
+                    const amount = parseFloat(amountInput.value);
+
+                    if (!amount || amount <= 0) {
+                        amountInput.focus();
+                        amountInput.classList.add('border-red-500', 'ring-red-500');
+                        return;
+                    }
+
+                    const emojis = ['📚', '🎁', '💡', '💖', '✨', '🚀', '🎨', '✈️'];
+                    const colors = ['bg-teal-400', 'bg-sky-400', 'bg-indigo-400', 'bg-fuchsia-400', 'bg-rose-400'];
+                    
+                    userProfile.budgets.push({
+                        name: name,
+                        amount: amount,
+                        emoji: emojis[Math.floor(Math.random() * emojis.length)],
+                        color: colors[Math.floor(Math.random() * colors.length)]
+                    });
+
+                    renderBudgets();
+                    formContainer.remove();
+                    addNewBudgetBtn.style.display = 'block';
+                });
+            });
+
+            // --- AI Chatbot Logic ---
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userMessage = chatInput.value.trim();
+                if (userMessage === '') return;
+
+                appendMessage(userMessage, 'user');
+                chatInput.value = '';
+
+                setTimeout(() => {
+                    const aiResponse = getAIResponse(userMessage);
+                    appendMessage(aiResponse, 'ai');
+                }, 1000);
+            });
+
+            function appendMessage(message, sender) {
+                const messageWrapper = document.createElement('div');
+                messageWrapper.classList.add('flex');
+                
+                const messageEl = document.createElement('div');
+                messageEl.classList.add('rounded-lg', 'p-3', 'max-w-xs', 'text-sm');
+                messageEl.textContent = message;
+
+                if (sender === 'user') {
+                    messageWrapper.classList.add('justify-end');
+                    messageEl.classList.add('bg-violet-600', 'text-white');
+                } else {
+                    messageEl.classList.add('bg-slate-700');
+                }
+
+                messageWrapper.appendChild(messageEl);
+                chatMessages.appendChild(messageWrapper);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function getAIResponse(message) {
+                const lowerCaseMessage = message.toLowerCase();
+                if (lowerCaseMessage.includes('save') || lowerCaseMessage.includes('saving')) {
+                    return "A great way to save more is to use the 50/30/20 rule: 50% of your income for needs, 30% for wants, and 20% for savings. Also, try setting up automatic transfers to a separate savings account each month!";
+                }
+                if (lowerCaseMessage.includes('invest')) {
+                    return "For students, starting with a Systematic Investment Plan (SIP) in a Nifty 50 Index Fund is a fantastic low-risk option. You can often start with as little as ₹500 per month. It's a great way to get started with long-term wealth building.";
+                }
+                if (lowerCaseMessage.includes('budget')) {
+                    return "Budgeting is key! Start by listing all your income (pocket money, part-time job) and your fixed expenses (rent, phone bill). The money left over is what you can allocate for daily spending and savings. Our 'Budgets' feature can help you track this!";
+                }
+                if (lowerCaseMessage.includes('risk')) {
+                    return "Investment risk refers to the possibility of losing money. High-risk investments like individual stocks can offer high rewards but also have higher potential for loss. Low-risk options like index funds are more stable but typically grow slower over time.";
+                }
+                 if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi')) {
+                    return `Hello ${userProfile.name}! How can I help you with your finances today?`;
+                }
+
+                return "I'm still learning about personal finance. Try asking me something like 'how can I save money?' or 'what is a good investment for a student?'.";
+            }
+
+            // --- Navigation Observer ---
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
+
